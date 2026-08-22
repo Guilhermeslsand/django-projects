@@ -19,8 +19,10 @@ COPY . .
 
 RUN mkdir -p /app/staticfiles
 RUN mkdir -p /app/media
-RUN python manage.py collectstatic --noinput
+RUN SECRET_KEY="dummy" DEBUG="False" POSTGRES_DB="dummy" POSTGRES_USER="dummy" POSTGRES_PASSWORD="dummy" POSTGRES_HOST="localhost" POSTGRES_PORT="5432" COOKIE_SECRET="dummy" CSRF_SECRET="dummy" python manage.py collectstatic --noinput
+
+RUN chmod +x /app/entrypoint.sh
 
 EXPOSE 8000
 
-CMD ["uvicorn", "config.asgi:application", "--host", "0.0.0.0", "--port", "8000"]
+ENTRYPOINT ["/app/entrypoint.sh"]
