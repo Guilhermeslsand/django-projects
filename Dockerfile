@@ -19,8 +19,19 @@ COPY . .
 
 RUN mkdir -p /app/staticfiles
 RUN mkdir -p /app/media
-RUN SECRET_KEY="dummy" DEBUG="False" POSTGRES_DB="dummy" POSTGRES_USER="dummy" POSTGRES_PASSWORD="dummy" POSTGRES_HOST="localhost" POSTGRES_PORT="5432" COOKIE_SECRET="dummy" CSRF_SECRET="dummy" python manage.py collectstatic --noinput
+# Define variáveis temporárias apenas para o momento do build
+ARG SECRET_KEY="dummy"
+ARG DEBUG="False"
+ARG POSTGRES_DB="dummy"
+ARG POSTGRES_USER="dummy"
+ARG POSTGRES_PASSWORD="dummy"
+ARG POSTGRES_HOST="localhost"
+ARG POSTGRES_PORT="5432"
+ARG COOKIE_SECRET="dummy"
+ARG CSRF_SECRET="dummy"
 
+# Roda o comando usando as variáveis acima
+RUN python manage.py collectstatic --noinput
 RUN chmod +x /app/entrypoint.sh
 
 EXPOSE 8000
