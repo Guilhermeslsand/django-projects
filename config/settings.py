@@ -153,3 +153,8 @@ MAILERS = {
         'BACKEND': 'django.core.mail.backends.console.EmailBackend',
     },
 }
+
+# Permite que formulários e a tela de login do Admin funcionem via HTTPS
+CSRF_TRUSTED_ORIGINS = [
+    'https://guilhermeandrade.duckdns.org',
+]
