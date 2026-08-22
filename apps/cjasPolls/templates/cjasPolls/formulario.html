@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Formulário CJAS
+{% endblock %}
+
+{% block extra_css %}
+    <!-- Carrega o CSS exclusivo do formulário -->
+    <link rel="stylesheet" href="{% static 'cjasPolls/css/formulario.css' %}">
+{% endblock %}
+
+{% block extra_favicon %}
+    <!-- Favicon exclusivo para as páginas do CJAS -->
+    <link rel="icon" type="image/png" href="{% static 'cjasPolls/img/perfil.jpg' %}">
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <img src="{% static 'cjasPolls/img/capa.png' %}" alt="Capa Cjas" class="form-capa">
+    
+    <header class="card title-card">
+        <h1>Formulário Cjas</h1>
+        <p class="title-description">
+        Seja muito bem-vindo(a)! Este formulário tem como objetivo organizar a nossa 
+        participação no CJAS, garantindo que todos os detalhes de transporte, acomodação 
+        e apoio estejam perfeitamente alinhados para uma experiência inesquecível. 
+        Por favor, preencha as informações abaixo com atenção. Agradecemos muito a sua colaboração!
+        </p>
+        <p class="title-description">
+            Em caso de dúvidas, você pode entrar em contato com o suporte: 
+            <span class="support-contact">+55 85 987945308 - Guilherme Andrade (Comitê de TI)</span>
+        </p>
+    </header>
+
+    <form id="formulario-cjas" method="POST" action="" data-api-url="/cjas/api/V1/formularios/">
+        {% csrf_token %}
+
+        <!-- IDENTIFICAÇÃO -->
+        <section id="identificacao" class="card">
+            <h2>Identificação</h2>
+            <div class="input-group">
+                <label for="nome_completo">Nome completo *</label>
+                <input type="text" id="nome_completo" name="nome_completo" autocomplete="name" placeholder="Sua resposta" required>
+            </div>
+            <div class="input-group">
+                <label for="estaca">Estaca *</label>
+                <select id="estaca" name="estaca" required>
+                    <option value="" disabled selected>Selecione sua estaca</option>
+                    <!-- Opções geradas pelo view do Django -->
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="unidade">Ala/Ramo *</label>
+                <select id="unidade" name="unidade" required disabled>
+                    <option value="" disabled selected>Selecione primeiro sua estaca</option>
+                </select>
+            </div>
+        </section>
+
+        <!-- PARTICIPAÇÃO -->
+        <section id="participacao" class="card">
+            <h2>Participação</h2>
+            <fieldset class="input-group">
+                <legend>Você irá participar do CJAS? *</legend>
+                <label class="radio-option"><input type="radio" name="vai_cjas" value="true" required> Sim</label>
+                <label class="radio-option"><input type="radio" name="vai_cjas" value="false"> Não</label>
+            </fieldset>
+
+            <div id="secao-nao-participacao" hidden>
+                <div class="input-group">
+                    <label for="motivo_nao_participacao">Por que você não irá participar?</label>
+                    <select id="motivo_nao_participacao" name="motivo_nao_participacao">
+                        <option value="" disabled selected>Selecione um motivo</option>
+                        <option value="TRABALHO">Vou trabalhar</option>
+                        <option value="VIAGEM">Vou viajar</option>
+                        <option value="NAO_QUERO">Não quero mais participar</option>
+                        <option value="OUTROS">Outro</option>
+                    </select>
+                </div>
+
+                <div id="secao-motivo-outros" hidden>
+                    <div class="input-group">
+                        <label for="motivo_outros">Explique o motivo</label>
+                        <input type="text" id="motivo_outros" name="motivo_outros" placeholder="Sua resposta">
+                    </div>
+                </div>
+
+                <div id="secao-confirmacao-cancelamento" class="input-group">
+                    <p class="section-desc">
+                        Ao confirmar que você não irá mais participar do CJAS,
+                        sua inscrição poderá ser cancelada para que a vaga seja
+                        disponibilizada para outra pessoa.
+                    </p>
+                    <label class="checkbox-option">
+                        <input type="checkbox" id="confirmacao-cancelamento" name="confirmacao_cancelamento">
+                        Confirmo que entendi que minha inscrição poderá ser cancelada
+                        para disponibilizar a vaga para outra pessoa.
+                    </label>
+                </div>
+            </div>
+        </section>
+
+        <!-- TRANSPORTE (Oculto por padrão, gerido pelo JS) -->
+        <section id="transporte" class="card" hidden>
+            <h2>Transporte</h2>
+            <fieldset class="input-group">
+                <legend>Você irá com o ônibus da sua estaca na sexta-feira à noite?</legend>
+                <label class="radio-option"><input type="radio" name="vai_onibus_sexta" value="true"> Sim</label>
+                <label class="radio-option"><input type="radio" name="vai_onibus_sexta" value="false"> Não</label>
+            </fieldset>
+
+            <div id="seccao-horario-detalhes" hidden style="margin-top: 16px;"> 
+                <div class="input-group">
+                    <label for="horario_chegada_sabado">Qual horário você pretende chegar no sábado?</label>
+                    <input type="time" id="horario_chegada_sabado" name="horario_chegada_sabado">
+                    <p class="section-desc">A chegada no sábado será por conta própria.</p>
+                </div>
+                <label class="checkbox-option">
+                    <input type="checkbox" id="confirmacao-transporte" name="confirmacao_transporte">
+                    Confirmo que entendi que, caso eu não vá com o ônibus da estaca na sexta-feira, deverei ir por conta própria.
+                </label>
+            </div>
+        </section>
+
+        <!-- QR CODE (Oculto por padrão, gerido pelo JS) -->
+        <section id="qr-code" class="card" hidden>
+            <h2>QR Code</h2>
+            <fieldset class="input-group">
+                <legend>Você recebeu o QR Code de Confirmação do Cjas no seu e-mail? *</legend>
+                <label class="radio-option"><input type="radio" name="recebeu_qr_code" value="true"> Sim</label>
+                <label class="radio-option"><input type="radio" name="recebeu_qr_code" value="false"> Não</label>
+            </fieldset>
+        </section>
+
+        <!-- FAMILIAR (Oculto por padrão, gerido pelo JS) -->
+        <section id="familiar" class="card" hidden>
+            <h2>Familiar</h2>
+            <fieldset class="input-group">
+                <legend>Você tem algum familiar <strong>do mesmo sexo</strong> que irá para o CJAS? *</legend>
+                <label class="radio-option"><input type="radio" name="tem_familiar_cjas" value="true"> Sim</label>
+                <label class="radio-option"><input type="radio" name="tem_familiar_cjas" value="false"> Não</label>
+            </fieldset>
+
+            <div id="secao-familiar-detalhes" hidden style="margin-top: 16px;">
+                <div class="input-group">
+                    <label for="familiar_nome">Nome do familiar</label>
+                    <input type="text" id="familiar_nome" name="familiar_nome" placeholder="Sua resposta">
+                </div>
+                <fieldset class="input-group">
+                    <legend>Vocês teriam a disponibilidade de compartilhar a mesma cama de casal?</legend>
+                    <label class="radio-option"><input type="radio" name="compartilhar_cama" value="true"> Sim</label>
+                    <label class="radio-option"><input type="radio" name="compartilhar_cama" value="false"> Não</label>
+                </fieldset>
+            </div>
+        </section>
+
+        <!-- SAÚDE (Oculto por padrão, gerido pelo JS) -->
+        <section id="saude" class="card" hidden>
+            <h2>Saúde</h2>
+            <fieldset class="input-group" style="margin-top: 16px;">
+                <legend>Possui alguma informação relacionada à sua saúde (como alergias, condições especiais ou medicamentos) que gostaria de acrescentar à sua inscrição?*</legend>
+                <p class="section-desc">Se você responder que sim, um integrante do comitê entrará em contato para alinharmos as informações com você.</p>
+                <label class="radio-option"><input type="radio" name="precisa_contato_saude" value="true"> Sim</label>
+                <label class="radio-option"><input type="radio" name="precisa_contato_saude" value="false"> Não</label>
+            </fieldset>
+        </section>
+
+        <!-- BOTÕES -->
+        <div class="form-actions">
+            <button type="button" class="btn-secondary" onclick="limparFormulario()">Limpar formulário</button>
+            <button type="button" class="submit-btn" onclick="abrirModalRevisao()">Revisar</button>
+        </div>
+    </form>
+</div>
+
+<!-- MODAL DE REVISÃO -->
+<div class="modal-overlay" id="modal-revisao">
+    <div class="modal-content">
+        <div class="modal-header">Revise suas respostas</div>
+        <div class="modal-body" id="modal-body-content">
+            <!-- O JavaScript injetará o resumo das respostas aqui -->
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn-secondary" onclick="fecharModal()">Voltar</button>
+            <button type="button" class="submit-btn" onclick="enviarViaAPI()">Enviar Inscrição</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+    <!-- Importa o JavaScript separado -->
+    <script type="module" src="{% static 'cjasPolls/js/formulario.js' %}"></script>
+{% endblock %}

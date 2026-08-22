@@ -1,0 +1,24 @@
+/* Reset básico para manter consistência entre navegadores */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body{
+    margin:0;
+    padding: 0;
+    font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4eee7;
+    color: #202124;
+    -webkit-font-smothing: antialiased;
+}
+
+.main-content {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    margin-top: 0;
+}
+

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Inscrição Realizada{% endblock %}
+
+{% block extra_favicon %}
+    <!-- Favicon exclusivo para as páginas do CJAS -->
+    <link rel="icon" type="image/png" href="{% static 'cjasPolls/img/perfil.jpg' %}">
+{% endblock %}
+
+{% block content %}
+<div class="form-container" style="text-align: center; margin-top: 60px;">
+    <div class="card title-card" style="padding: 40px 24px;">
+        <h1 style="color: var(--primary-brown); margin-bottom: 16px;">Inscrição Realizada!</h1>
+        <p style="font-size: 16px; color: var(--text-muted); margin-bottom: 24px;">
+            Suas informações foram salvas com sucesso. Agradecemos sua participação no CJAS!
+        </p>
+    </div>
+</div>
+{% endblock %}

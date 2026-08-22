@@ -1,0 +1,236 @@
+/* Variáveis de Cores (Baseadas na identidade visual) */
+:root {
+    --primary-brown: #513124;
+    --primary-brown-hover: #3d241a;
+    --card-bg: #ffffff;
+    --text-muted: #5f6368;
+    --border-color: #dadce0;
+}
+
+/* Estrutura Principal */
+.form-container { 
+    width: 100%; 
+    max-width: 640px; 
+    margin: 0 auto 40px auto; 
+}
+
+.form-capa { 
+    width: 100%; 
+    height: auto; 
+    border-radius: 8px; 
+    margin-bottom: 12px; 
+    object-fit: cover; 
+    border: 1px 
+    solid var(--border-color); 
+}
+
+/* Cards estilo Google Forms */
+.card { 
+    background-color: var(--card-bg); 
+    border-radius: 8px; border: 1px solid var(--border-color); 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05); 
+    padding: 24px; 
+    margin-bottom: 12px; 
+    transition: box-shadow 0.2s, border-left 0.2s; 
+}
+
+.card:focus-within { 
+    border-left: 6px solid var(--primary-brown); 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+.title-card { 
+    border-top: 10px solid var(--primary-brown); 
+    border-top-left-radius: 8px; 
+    border-top-right-radius: 8px; 
+}
+.title-card h1 { 
+    font-size: 32px; 
+    font-weight: 400; 
+    margin: 0 0 12px 0; 
+}
+.title-card p { 
+    font-size: 14px; 
+    color: var(--text-muted); 
+    margin: 0; 
+}
+.card h2 { 
+    font-size: 16px; 
+    font-weight: 500; 
+    margin: 0 0 16px 0; 
+}
+.section-desc { 
+    font-size: 14px; 
+    color: var(--text-muted); 
+    margin: 0 0 8px 0; 
+    line-height: 1.5; 
+}
+
+/* Agrupamento de Inputs */
+.input-group { 
+    margin-bottom: 24px; 
+    display: flex; 
+    flex-direction: column; 
+}
+.input-group:last-child { 
+    margin-bottom: 0; 
+}
+.input-group > label, legend { 
+    font-size: 16px; 
+    margin-bottom: 12px; 
+    font-weight: 400; 
+}
+fieldset { 
+    border: none; 
+    padding: 0; 
+    margin: 0; 
+}
+
+/* Estilização de Textos e Selects */
+input[type="text"], input[type="time"], select { 
+    width: 100%; 
+    max-width: 350px; 
+    border: none; 
+    border-bottom: 1px solid var(--border-color); 
+    outline: none; padding: 8px 0; 
+    font-size: 14px; 
+    font-family: inherit; 
+    background-color: transparent; 
+    transition: border-bottom 0.2s; 
+    color: inherit; 
+}
+input[type="text"]:focus, input[type="time"]:focus, select:focus { 
+    border-bottom: 2px solid var(--primary-brown); 
+}
+input::placeholder { color: #70757a; }
+select { cursor: pointer; }
+select:disabled { color: #9aa0a6; cursor: not-allowed; }
+
+/* Radios e Checkboxes */
+.radio-option, .checkbox-option { 
+    display: flex; 
+    align-items: center; 
+    font-size: 14px; 
+    cursor: pointer; 
+    margin-bottom: 12px; 
+    font-weight: 400; 
+}
+.radio-option input[type="radio"], .checkbox-option input[type="checkbox"] { 
+    margin-right: 12px; 
+    width: 20px; 
+    height: 20px; 
+    accent-color: var(--primary-brown); 
+    cursor: pointer; }
+.help-text { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+
+/* Botões do Formulário (Enviar e Reset) */
+.form-actions { 
+    display: flex; 
+    justify-content: space-between; 
+    gap: 16px; 
+    margin-top: 16px; }
+.submit-btn { 
+    background-color: var(--primary-brown); 
+    color: white; border: none; 
+    border-radius: 4px; 
+    padding: 10px 24px; 
+    font-size: 14px; 
+    font-weight: 500; 
+    cursor: pointer; 
+    transition: background-color 0.2s; 
+}
+.submit-btn:hover { background-color: var(--primary-brown-hover); }
+.btn-secondary { 
+    background-color: transparent; 
+    color: var(--primary-brown); 
+    border: 1px solid var(--border-color); 
+    border-radius: 4px; 
+    padding: 10px 24px; 
+    font-size: 14px; 
+    font-weight: 500; 
+    cursor: pointer; 
+    transition: 0.2s; 
+}
+.btn-secondary:hover { 
+    background-color: #f1ede8; 
+    border-color: var(--primary-brown); 
+}
+
+/* Cabeçalho principal refinado */
+.title-description {
+    font-size: 18px; /* Fonte um pouco maior para melhor leitura */
+    color: #3c4043;  /* Cor mais escura para dar destaque e contraste */
+    margin: 14px 0 0 0;
+    line-height: 1.6;
+}
+
+/* Espaçamento elegante e destaque para o parágrafo de suporte */
+.title-description + .title-description {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color); /* Linha sutil de separação */
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* Destaque para o número de contato */
+.support-contact {
+    font-weight: 500;
+    color: var(--primary-brown);
+}
+
+/* CSS DO MODAL DE REVISÃO */
+/* Container de Sobreposição */
+.modal-overlay {
+    display: none; 
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Caixa Principal do Modal */
+.modal-content {
+    background-color: var(--card-bg, #ffffff);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 85vh;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Cabeçalho do Modal */
+.modal-header { 
+    font-size: 22px; 
+    font-weight: 500; 
+    margin-bottom: 20px; 
+    color: #202124;
+    border-bottom: 2px solid var(--primary-brown, #513124);
+    padding-bottom: 12px;
+}
+
+/* Corpo e Rolagem (Scroll) */
+.modal-body { 
+    overflow-y: auto; 
+    flex-grow: 1; 
+    margin-bottom: 24px;
+    padding-right: 8px;
+}
+
+.modal-body::-webkit-scrollbar { width: 6px; }
+.modal-body::-webkit-scrollbar-thumb { background-color: var(--border-color, #dadce0); border-radius: 4px; }
+
+/* Rodapé do Modal */
+.modal-footer { display: flex; justify-content: flex-end; gap: 12px; }
+
+/* Itens de Revisão (Injetados via JS) */
+.review-item { margin-bottom: 16px; border-bottom: 1px solid #f1f3f4; padding-bottom: 8px; }
+.review-item:last-child { border-bottom: none; }
+.review-q { font-size: 13px; color: var(--text-muted, #5f6368); margin-bottom: 4px; }
+.review-a { font-size: 15px; color: #202124; font-weight: 500; }

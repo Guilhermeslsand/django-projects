@@ -1,0 +1,17 @@
+services:
+
+  postgres:
+    image: postgres:18
+    container_name: cjas-dev-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - posgres_data:/var/lib/postgresql
+    ports:
+      - "5432:5432"
+
+volumes:
+  posgres_data:
+    name: cjas-dev-sql-volume

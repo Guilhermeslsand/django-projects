@@ -1,0 +1,33 @@
+.site-footer {
+    width: 100%;
+    max-width: 640px;
+    margin: 40px auto 20px auto;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.site-footer p {
+    margin: 0 0 8px 0;
+}
+
+.footer-socials {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.footer-socials a {
+    color: var(--primary-brown);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.footer-socials a:hover {
+    color: var(--primary-brown-hover);
+    text-decoration: underline;
+}

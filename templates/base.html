@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Guilherme-app{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!--Estilo global-->
+    <link href="{% static 'css/global.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/components/footer.css' %}">
+    <!-- Espaço para estilos específicos de cada página -->
+    {% block extra_css %} {% endblock %}
+    <!-- Bloco dinâmico para favicon específico por página/app -->
+    {% block extra_favicon %}
+        <!-- Favicon padrão do site (opcional) -->
+    {% endblock %}
+</head>
+<body>
+    <!-- {% include "components/header.html" %} -->
+    <main class="main-content">
+        {% block content %}
+        {% endblock %}
+    </main>
+    {% include "components/footer.html" %}
+    <!-- Espaço para scripts específicos de cada página -->
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
