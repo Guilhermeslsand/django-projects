@@ -142,7 +142,7 @@ STATICFILES_DIRS = [
 ]
 
 # Onde o Django vai JUNTAR todos os arquivos para a Produção:
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # Email
